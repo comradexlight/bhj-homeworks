@@ -1,23 +1,27 @@
 "use strict"
 
-const modalMain = document.getElementById("modal_main");
-const btn = document.getElementsByClassName("btn btn_danger modal__close show-success")[0];
-const modalSuccess = document.getElementById("modal_success");
-const closeBtn = document.getElementsByClassName("modal__close modal__close_times")[0];
-const closeBtnAgain = document.getElementsByClassName("modal__close modal__close_times")[1];
+const closeButtonsList = document.getElementsByClassName("modal__close modal__close_times");
+const wellDoneButton = document.getElementsByClassName("btn btn_danger modal__close show-success")[0];
 
-modalMain.classList.add("modal_active");
+function showWindow() {
+	const openWindowsList = Array.from(document.getElementsByClassName("modal_active"));
 
-function pushCloseBtn() {
-	modalMain.classList.remove("modal_active");
+	if (openWindowsList.length === 0) {
+		document.getElementsByClassName("modal")[0].classList.add("modal_active");
+	}
+	else if (openWindowsList.length !== 0) {
+		closeWindow();
+		document.getElementsByClassName("modal")[1].classList.add("modal_active");
+
+	};
+
 };
 
-function pushTheBtn() {
-	modalSuccess.classList.add("modal_active");
-}
+function closeWindow() {
+	document.querySelector(".modal_active").classList.remove("modal_active");
+};
 
-
-
-btn.onclick = pushTheBtn;
-closeBtn.onclick = pushCloseBtn;
-closeBtnAgain.onclick = pushCloseBtn;
+showWindow();
+closeButtonsList[0].onclick = closeWindow;
+wellDoneButton.onclick = showWindow;
+closeButtonsList[1].onclick = closeWindow;
