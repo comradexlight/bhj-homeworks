@@ -32,5 +32,8 @@ userInput.addEventListener('keyup', function(event) {
             </div>
         ` 
 		userInput.value = '';
+		const chatContainer = document.getElementsByClassName('chat-widget__messages-container')[0];
+		chatContainer.scrollTo(0, messages.getBoundingClientRect().height);
 	}
 })
+	
