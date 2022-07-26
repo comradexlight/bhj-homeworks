@@ -3,10 +3,11 @@
 const taskInput = document.getElementById('task__input');
 const tasksAdd = document.getElementById('tasks__add');
 const tasksList = document.getElementById('tasks__list');
-//const closeButtonsList = document.querySelectorAll('.task__remove');
+
+tasksAdd.onclick = function(event) { event.preventDefault() };
 
 function addTask() {
-	const task = `
+	const taskHTML = `
 				<div class="task">
 	  				<div class="task__title">
 	    				${taskInput.value}
@@ -15,17 +16,23 @@ function addTask() {
 				</div>
 				`
 
-	tasksList.insertAdjacentHTML('afterend', task);
-	let taskRemove = document.querySelectorAll('.task__remove');
-	console.log(taskRemove)
+	tasksList.insertAdjacentHTML('afterend', taskHTML);
+	
+	const taskRemoveButton = document.querySelector('.task__remove');
+	taskRemoveButton.addEventListener('click', function(event) {
+		const task = event.target.closest('.task');
+		removeTask(task);
+	})
 
+}
+
+function removeTask(task) {
+	task.remove()	
 }
 
 function clearTaskInput() {
 	taskInput.value = '';
 };
-
-tasksAdd.onclick = function(event) { event.preventDefault() };
 
 taskInput.addEventListener('keydown', function(event) {
 	if (event.key === 'Enter' && taskInput.value && taskInput.value !== ' ') {
@@ -33,15 +40,3 @@ taskInput.addEventListener('keydown', function(event) {
 		clearTaskInput();
 	}
 })
-
-// function removeTask(task) {
-// 	console.log(task.closest('.task'))
-// }
-
-// for (let i = 0; i < closeButtonsList.length; i++) {
-// 	const closeButton = closeButtonsList[i];
-// 	closeButton.addEventListener('click', function(event) {
-// 		console.log(event.target)
-// 		return false
-// 	})
-// };
