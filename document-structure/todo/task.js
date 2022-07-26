@@ -16,6 +16,8 @@ function addTask() {
 				`
 
 	tasksList.insertAdjacentHTML('afterend', task);
+	let taskRemove = document.querySelectorAll('.task__remove');
+	console.log(taskRemove)
 
 }
 
