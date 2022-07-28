@@ -1,6 +1,8 @@
 'use strict'
 
 const allElememtsHasTooltipList = document.getElementsByClassName('has-tooltip');
+const tooltip = document.createElement('div');
+tooltip.className = 'tooltip';
 
 function getCoords(element) {
   let box = element.getBoundingClientRect();
@@ -13,17 +15,16 @@ function getCoords(element) {
   };
 }
 
+
 function getTooltip(element) {
-	const tooltip = document.createElement('div');
-	
 	let coords = getCoords(element.target);
 	tooltip.style.left = coords.left + "px";
-  	tooltip.style.top = coords.bottom + "px";
-  	tooltip.textContent = element.target.title;
+  tooltip.style.top = coords.bottom + "px";
+  tooltip.textContent = element.target.title;
 	tooltip.style.position = 'absolute';
 
 	element.target.appendChild(tooltip);
-	tooltip.classList.add('tooltip', 'tooltip_active');
+	tooltip.classList.toggle('tooltip_active');
 
 	return false
 };

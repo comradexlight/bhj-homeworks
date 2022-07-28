@@ -4,8 +4,6 @@ const taskInput = document.getElementById('task__input');
 const tasksAdd = document.getElementById('tasks__add');
 const tasksList = document.getElementById('tasks__list');
 
-tasksAdd.onclick = function(event) { event.preventDefault() };
-
 function addTask() {
 	const taskHTML = `
 				<div class="task">
@@ -35,7 +33,15 @@ function clearTaskInput() {
 };
 
 taskInput.addEventListener('keydown', function(event) {
-	if (event.key === 'Enter' && taskInput.value && taskInput.value !== ' ') {
+	if (event.key === 'Enter' && taskInput.value.trim().length !==0) {
+		addTask();
+		clearTaskInput();
+	}
+})
+
+tasksAdd.addEventListener('click', function(event) {
+	event.preventDefault() 
+	if (taskInput.value.trim().length !==0) {
 		addTask();
 		clearTaskInput();
 	}
