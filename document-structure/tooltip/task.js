@@ -15,20 +15,26 @@ function getCoords(element) {
   };
 }
 
-
 function getTooltip(element) {
-	let coords = getCoords(element.target);
-	tooltip.style.left = coords.left + "px";
-  tooltip.style.top = coords.bottom + "px";
-  tooltip.textContent = element.target.title;
-	tooltip.style.position = 'absolute';
+	let activeTooltip = document.querySelector('.tooltip_active');
+	
+	if (activeTooltip && activeTooltip === element.target.children[0]) {
+		activeTooltip.remove();
+	}
 
-	element.target.appendChild(tooltip);
-	tooltip.classList.toggle('tooltip_active');
+	else {
+		let coords = getCoords(element.target);
+		tooltip.style.left = coords.left + "px";
+	  tooltip.style.top = coords.bottom + "px";
+	  tooltip.textContent = element.target.title;
+		tooltip.style.position = 'absolute';
+
+		element.target.appendChild(tooltip);
+		tooltip.classList.add('tooltip_active');
+	};
 
 	return false
 };
-
 
 for (let i = 0; i < allElememtsHasTooltipList.length; i++) {
 	const elementHasTooltip = allElememtsHasTooltipList[i];

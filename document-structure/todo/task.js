@@ -32,13 +32,6 @@ function clearTaskInput() {
 	taskInput.value = '';
 };
 
-taskInput.addEventListener('keydown', function(event) {
-	if (event.key === 'Enter' && taskInput.value.trim().length !==0) {
-		addTask();
-		clearTaskInput();
-	}
-})
-
 tasksAdd.addEventListener('click', function(event) {
 	event.preventDefault() 
 	if (taskInput.value.trim().length !==0) {
